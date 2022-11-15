@@ -1,0 +1,12 @@
+#!/bin/bash
+# requires secure-delete installed
+name=$(date +%s)
+mkdir sandbox-$name
+cd sandbox-$name
+printf "Sandbox created\n"
+printf "To quit, type 'exit'\n"
+printf "Once exited, everything is wiped\n"
+bash --rcfile <(cat ~/.bashrc; echo "PS1='sandbox-$name> '")
+printf "Cleaning...\n"
+cd ..
+srm -r -f sandbox-$name
