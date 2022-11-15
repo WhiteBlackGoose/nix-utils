@@ -3,10 +3,19 @@
 name=$(date +%s)
 mkdir sandbox-$name
 cd sandbox-$name
-printf "Sandbox created\n"
+printf "Creating sandbox...\n"
+tput smcup
+clear
+printf "+---------------+\n"
+printf "| \e[0;31mSANDBOX SHELL\e[m |\n"
+printf "+---------------+\n"
 printf "To quit, type 'exit'\n"
 printf "Once exited, everything is wiped\n"
-bash --rcfile <(cat ~/.bashrc; echo "PS1='sandbox-$name> '")
+printf "Sandbox ID: $name (available as SANDBOX_ID env variable)\n\n"
+SANDBOX_ID=$name bash --rcfile <(cat ~/.bashrc; echo "PS1='\e[0;31m\w> \n$\e[m '")
 printf "Cleaning...\n"
 cd ..
 srm -r -f sandbox-$name
+clear
+tput rmcup
+printf "Exited sandbox\n"
