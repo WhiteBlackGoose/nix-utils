@@ -6,16 +6,20 @@ cd sandbox-$name
 printf "Creating sandbox...\n"
 tput smcup
 clear
-printf "+---------------+\n"
-printf "| \e[0;31mSANDBOX SHELL\e[m |\n"
-printf "+---------------+\n"
-printf "To quit, type 'exit'\n"
-printf "Once exited, everything is wiped\n"
-printf "Sandbox ID: $name (available as SANDBOX_ID env variable)\n\n"
+printf "+-----------------------+                      ____                              \n"
+printf "|     \e[0;31mSANDBOX SHELL\e[m     |                     (_  _)                             \n"
+printf "|                       |           .  .       / /                               \n"
+printf "| To quit, type 'exit'  |        .\`_._'_..    / /                                \n"
+printf "| SandboxID: $name |        \   o   /   / /                                 \n"
+printf "| (available as env var |     Pru \ /   /  _/ /_                                 \n"
+printf "| SANDBOX_ID)           |   \e[0;33m\`. ~. \`\___/'./~.' /.~'\`.\e[m                   \n"
+printf "+-----------------------+   \e[0;33m.\`'\`.\`.'\`'\`.~.\`'~.\`'\`.~\`\e[m                \n"
+
 SANDBOX_ID=$name bash --rcfile <(cat ~/.bashrc; echo "PS1='\e[0;31m\w> \n$\e[m '")
 printf "Cleaning...\n"
 cd ..
 srm -r -f sandbox-$name
+rm -r sandbox-$name
 clear
 tput rmcup
 printf "Exited sandbox\n"
